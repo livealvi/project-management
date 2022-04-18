@@ -1,0 +1,27 @@
+/* dashboard - cards */
+.card {
+  background-color: #f4f5f7;
+}
+
+.card-title {
+  font-size: 15px;
+}
+
+.inside-card {
+  margin: 10px 0;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.inside-card:hover {
+  background-color: rgb(221 235 255);
+  cursor: pointer;
+}
+
+.create-issue {
+  width: 100%;
+}
+
+.create-issue:hover {
+  background-color: #d8d8d8;
+}
