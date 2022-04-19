@@ -9,19 +9,19 @@ const Header = () => {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Link className="brand" to="/">
+          <Link className="brand text-white" to="/">
             Project Management
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Link className="nav_bar" to="/dashboard">
+              <Link className="nav_bar text-white" to="/dashboard">
                 Dashboard
               </Link>
-              <Link className="nav_bar" to="/contact">
+              <Link className="nav_bar text-white" to="/contact">
                 Contact
               </Link>
-              <Link className="nav_bar" to="/about">
+              <Link className="nav_bar text-white" to="/about">
                 About
               </Link>
             </Nav>
