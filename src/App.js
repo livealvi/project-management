@@ -7,6 +7,10 @@ import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import NotFound from "./components/NotFound/NotFound";
 import ToDo from "./components/ToDo/ToDo";
+import Signin from "./components/SignFrom/Signin/Signin";
+import Signup from "./components/SignFrom/Signup/Signup";
+import EditUser from "./components/EditUser/EditUser";
+import Users from "./components/Users/Users";
 
 function App() {
   return (
@@ -18,6 +22,18 @@ function App() {
         </Route>
         <Route path="/contact">
           <Contact />
+        </Route>
+        <Route path="/signin">
+          <Signin />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="user/edit">
+          <EditUser />
+        </Route>
+        <Route path="/users">
+          <Users />
         </Route>
         <Route exact path="/">
           <Dashboard />

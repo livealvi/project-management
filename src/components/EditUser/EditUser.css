@@ -1,0 +1,42 @@
+/* edit-user form */
+.user_edit {
+  width: 100%;
+  padding: 50px;
+  border: 1px solid #ced4da;
+}
+
+.user_edit__form__box_button {
+}
+
+.user_edit__form,
+.login__form {
+  /* width: 300px; */
+}
+
+.form-element__login {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-element {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user_edit__form__box {
+  flex: 2;
+  margin: 20px;
+}
+
+.user_edit__form__box_button {
+  flex: 1 100%;
+  margin: 0 20px;
+}
+
+.user_edit__form__box_button > button {
+  width: 48.5%;
+}
+
+.needs-validation {
+  display: flex;
+}

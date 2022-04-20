@@ -61,18 +61,21 @@ const InProgress = (props) => {
               </h5>
             </Card.Title>
             {taskInProgress.map((inProgress) => (
-              <a href="" key={inProgress.id}>
+              <div href="" key={inProgress.id}>
                 <div className="inside-card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between">
                       <h5 className="card-title">{inProgress.task_title}</h5>
-                      <div className="remove-btn">
+                      <div
+                        onClick={() => props.handleDeleteTask(inProgress.id)}
+                        className="remove-btn"
+                      >
                         <FontAwesomeIcon icon={faTrashCan} />
                       </div>
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </Card.Body>
           <div

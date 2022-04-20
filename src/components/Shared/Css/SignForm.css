@@ -1,0 +1,116 @@
+.sign_form {
+  padding: 50px 0 !important;
+}
+
+.sign__wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.sign__email {
+  border-radius: 4px !important;
+  border: solid 1px #ababab !important;
+  text-align: center !important;
+  padding: 50px !important;
+  width: 398px !important;
+}
+
+.sign__title h1 {
+  text-align: left !important;
+  font-size: 24px !important;
+}
+
+.sign__input > input {
+  outline: 0 !important;
+  border-width: 0 0 2px !important;
+  border-color: #c5c5c5 !important;
+  width: 100% !important;
+  font-size: 16px !important;
+  padding: 11px 0 !important;
+  margin-top: 50px !important;
+  background-color: white !important;
+}
+
+input:focus {
+  border-color: #ff6e40 !important;
+}
+
+.sign__email__rememberme_forget_password {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 24px 0 40px 0 !important;
+}
+
+.sign__email__rememberme_forget_password a {
+  color: #ff6e40 !important;
+}
+
+.sign__email > p > a {
+  color: #eb592d !important;
+}
+
+.sign__email input[type="submit"] {
+  width: 100% !important;
+  height: 50px !important;
+  background-color: #ff6e40 !important;
+  border-radius: 4px !important;
+  border: none !important;
+  color: white !important;
+  margin: 10px 0 16px 0 !important;
+}
+
+.sign__email input[type="submit"]:hover {
+  color: white !important;
+  background-color: #eb592d !important;
+}
+
+.sign__divider {
+  margin: 24px 0 !important;
+  display: flex !important;
+}
+
+.sign__divider > p {
+  width: 100% !important;
+  text-align: center !important;
+  border-bottom: 1px solid #aaa !important;
+  line-height: 0em !important;
+  margin: 20px 0 20px !important;
+}
+
+.sign__divider span {
+  background: #fff !important;
+  padding: 0 10px !important;
+}
+
+.sign__facebook_google,
+.sign__divider {
+  padding: 0 50px !important;
+  width: 398px !important;
+}
+
+.sign__facebook_google button {
+  display: flex !important;
+  align-items: center !important;
+  border-radius: 57px !important;
+  border: solid 1px #c7c7c7 !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+}
+
+.sign__facebook_google button img {
+  width: 37px !important;
+}
+
+.sign__facebook_google > button {
+  padding: 7px 8px !important;
+}
+
+.sign__facebook_google button:hover {
+  border-color: #ff6e40 !important;
+  background: white !important;
+}
+
+.sign__facebook_google-space {
+  width: 37px !important;
+}

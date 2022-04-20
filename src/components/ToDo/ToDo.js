@@ -61,7 +61,7 @@ const ToDo = (props) => {
               </h5>
             </Card.Title>
             {taskTodo.map((todo) => (
-              <a href="" key={todo.id}>
+              <div href="" key={todo.id}>
                 <div className="inside-card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between">
@@ -72,7 +72,7 @@ const ToDo = (props) => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </Card.Body>
           <div

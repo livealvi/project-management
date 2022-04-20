@@ -62,7 +62,7 @@ const Done = (props) => {
               </h5>
             </Card.Title>
             {taskDone.map((done) => (
-              <a href="" key={done.id}>
+              <div href="" key={done.id}>
                 <div className="inside-card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between">
@@ -73,7 +73,7 @@ const Done = (props) => {
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </Card.Body>
           <div

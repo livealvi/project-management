@@ -6,11 +6,21 @@ import Issue from "../Issue/Issue";
 import InProgress from "../InProgress/InProgress";
 import Done from "../Done/Done";
 import axios from "axios";
+import service from "../../service";
 
 const Dashboard = () => {
   const [allIssues, setaAllIssues] = useState([]);
 
+  const [reloader, setReloader] = useState(0);
+
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleDeleteTask = async (id) => {
+    console.log(id);
+    const { data: response } = await service.delete(`tasks/${id}`);
+    console.log(response);
+    setReloader((v) => v + 1);
+  };
 
   useEffect(() => {
     axios
@@ -23,7 +33,7 @@ const Dashboard = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reloader]);
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <>
@@ -33,7 +43,10 @@ const Dashboard = () => {
             <ToDo todo={allIssues} />
           </div>
           <div className="col-md-3">
-            <InProgress inProgress={allIssues} />
+            <InProgress
+              handleDeleteTask={handleDeleteTask}
+              inProgress={allIssues}
+            />
           </div>
           <div className="col-md-3">
             <Issue issue={allIssues} />
