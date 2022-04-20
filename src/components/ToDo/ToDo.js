@@ -8,7 +8,7 @@ import axios from "axios";
 
 const ToDo = (props) => {
   const { taskTodo } = props.todo;
-  console.log(taskTodo);
+  const totalTodo = taskTodo.length;
 
   const [name, setName] = useState("");
   const [show, setShow] = useState(false);
@@ -53,12 +53,12 @@ const ToDo = (props) => {
       </div>
       {/* card */}
       <div className="mt-5">
-        <Card card-bg>
+        <Card className="card-bg">
           <Card.Body>
             <Card.Title>
               <h5 className="card-title">
                 <span className="text-uppercase fw-bold">To Do</span>
-                <span className="fw-light">10</span>
+                <span className="fw-light">{totalTodo}</span>
               </h5>
             </Card.Title>
             {taskTodo.map((todo) => (
