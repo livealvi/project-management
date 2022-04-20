@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
 import { Card, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSolid, faPlus } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 const InProgress = (props) => {
   const { taskInProgress } = props.inProgress;
@@ -27,12 +25,12 @@ const InProgress = (props) => {
       <div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title className="card-title">ToDo</Modal.Title>
+            <Modal.Title>In Progress</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <label for="exampleFormControlTextarea1" className="form-label">
               Example Title:{" "}
-              <span className="fw-bold">Next Meeting at Day 5</span>
+              <span className="fw-bold">Building Landing Page</span>
             </label>
             <Form.Control
               as="textarea"

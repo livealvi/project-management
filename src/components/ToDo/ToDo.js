@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSolid, faPlus } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 const ToDo = (props) => {
   const { taskTodo } = props.todo;
@@ -26,7 +25,7 @@ const ToDo = (props) => {
       <div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title className="card-title">ToDo</Modal.Title>
+            <Modal.Title>ToDo</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <label for="exampleFormControlTextarea1" className="form-label">
