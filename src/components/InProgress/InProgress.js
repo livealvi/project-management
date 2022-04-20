@@ -3,7 +3,7 @@ import { Card, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSolid, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSolid, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const InProgress = (props) => {
   const { taskInProgress } = props.inProgress;
@@ -64,7 +64,12 @@ const InProgress = (props) => {
               <a href="" key={inProgress.id}>
                 <div className="inside-card">
                   <div className="card-body">
-                    <h5 className="card-title">{inProgress.task_title}</h5>
+                    <div className="d-flex justify-content-between">
+                      <h5 className="card-title">{inProgress.task_title}</h5>
+                      <div className="remove-btn">
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </a>

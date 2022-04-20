@@ -4,7 +4,7 @@ import { Card, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSolid, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSolid, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const Done = (props) => {
   const { taskDone } = props.done;
@@ -61,11 +61,16 @@ const Done = (props) => {
                 <span className="fw-light">{totalDone}</span>
               </h5>
             </Card.Title>
-            {taskDone.map((taskDone) => (
-              <a href="" key={taskDone.id}>
+            {taskDone.map((done) => (
+              <a href="" key={done.id}>
                 <div className="inside-card">
                   <div className="card-body">
-                    <h5 className="card-title">{taskDone.task_title}</h5>
+                    <div className="d-flex justify-content-between">
+                      <h5 className="card-title">{done.task_title}</h5>
+                      <div className="remove-btn">
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </a>
