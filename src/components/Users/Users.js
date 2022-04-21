@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import service from "../../service";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  const [reloader, setReloader] = useState(0);
+  useEffect(() => {
+    (async () => {
+      const { data: response } = await service.get(`user-list`);
+      console.log(response);
+      setUsers(response);
+    })();
+  }, [reloader]);
+
+  const handleDelete = async (id) => {
+    const { data: response } = await service.delete(`users/${id}`);
+    console.log(response);
+    setReloader((v) => v + 1);
+  };
   return (
     <Container>
-      <div class="mb-4">
-        <div class="mt-4">
+      <div className="mb-4">
+        <div className="mt-4">
           <h2>User{" > "}List</h2>
         </div>
 
-        <div class="d-flex justify-content-center mt-5">
-          <div class="table-responsive w-100">
-            <table class="table table-hover table-bordered text-center">
+        <div className="d-flex justify-content-center mt-5">
+          <div className="table-responsive w-100">
+            <table className="table table-hover table-bordered text-center">
               <thead>
-                <tr class="text-center align-middle">
+                <tr className="text-center align-middle">
                   <th scope="col">#</th>
                   <th scope="col">ID</th>
                   <th scope="col">Role</th>
@@ -22,7 +39,42 @@ const Users = () => {
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody class="align-middle text-lowercase">
+              <tbody className="align-middle text-lowercase">
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <th scope="row">{users.length}</th>
+                    <td>{user.id}</td>
+                    <td>{user.role}</td>
+                    <td>{user.user_name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <Link to={`/user-edit/${user.id}`}>
+                        <button
+                          type="button"
+                          className="btn btn-primary mb-2 mb-sm-0"
+                        >
+                          Profile
+                        </button>
+                      </Link>
+                      <Link to={`/user-edit/${user.id}`}>
+                        <button
+                          type="button"
+                          className="btn btn-success mb-2 mb-sm-0"
+                        >
+                          Edit
+                        </button>
+                      </Link>
+
+                      <button
+                        onClick={() => handleDelete(user.id)}
+                        type="button"
+                        className="btn btn-danger"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
                 {/* @foreach($users as $count=>$user ) */}
                 {/* <tr>
                         <th scope="row">{{++$count}}</th>
@@ -31,14 +83,14 @@ const Users = () => {
                         <td>{{$user->user_name}}</td>
                         <td>{{$user->email}}</td>
                         <td>
-                            <a href="/user-edit/{{$user->id}}">
-                                <button type="button" class="btn btn-primary mb-2 mb-sm-0">Profile</button>
+                            <a to="/user-edit/{{$user->id}}">
+                                <button type="button" className="btn btn-primary mb-2 mb-sm-0">Profile</button>
                             </a>
-                            <a href="/user-edit/{{$user->id}}">
-                                <button type="button" class="btn btn-success mb-2 mb-sm-0">Edit</button>
+                            <a to="/user-edit/{{$user->id}}">
+                                <button type="button" className="btn btn-success mb-2 mb-sm-0">Edit</button>
                             </a>
-                            <a href="/user-delete/{{$user->id}}">
-                                <button type="button" class="btn btn-danger">Delete</button>
+                            <a to="/user-delete/{{$user->id}}">
+                                <button type="button" className="btn btn-danger">Delete</button>
                             </a>
                         </td>
                     </tr>

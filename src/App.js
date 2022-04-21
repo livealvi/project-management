@@ -29,7 +29,7 @@ function App() {
         <Route path="/signup">
           <Signup />
         </Route>
-        <Route path="user/edit">
+        <Route path="/user-edit/:id">
           <EditUser />
         </Route>
         <Route path="/users">

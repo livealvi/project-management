@@ -1,27 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import service from "../../service";
 import "./EditUser.css";
 
 const EditUser = () => {
+  const params = useParams();
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    (async () => {
+      const { data: response } = await service.get(`users/${params.id}`);
+      console.log(response);
+      setUser(response);
+    })();
+  }, []);
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    const { data: response } = await service.put(`users/${user.id}`, user);
+    console.log(response);
+  };
+  if (user == null) return <>Loading...</>;
   return (
     <>
       <Container>
-        <div class="mb-4">
-          <div class="mt-4">
+        <div className="mb-4">
+          <div className="mt-4">
             <h2>User Edit</h2>
           </div>
 
-          <div class="d-flex justify-content-center mt-5">
-            <div class="user_edit">
-              <div class="user_edit__form">
+          <div className="d-flex justify-content-center mt-5">
+            <div className="user_edit">
+              <div className="user_edit__form">
                 <form
                   action=""
                   method="post"
-                  class="needs-validation form-element"
+                  className="needs-validation form-element"
                 >
                   {/* -- for error -- */}
                   {/* @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div className="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -29,16 +46,20 @@ const EditUser = () => {
                         </ul>
                     </div>
                     @endif */}
-                  <div class="user_edit__form__box">
+                  <div className="user_edit__form__box">
                     {/* -- role -- */}
-                    <div class="mb-3">
-                      <label for="role" class="form-label">
+                    <div className="mb-3">
+                      <label for="role" className="form-label">
                         Role
                       </label>
                       <select
-                        class="form-select"
+                        className="form-select"
                         name="role"
                         aria-label="Default select example"
+                        value={user.role}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, role: e.target.value }))
+                        }
                       >
                         <option selected>Not Selected</option>
                         <option value="admin">Admin</option>
@@ -48,177 +69,192 @@ const EditUser = () => {
                       </select>
                       {/* -- show error message -- */}
 
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                     </div>
 
                     {/* -- name -- */}
-                    <div class="mb-3">
-                      <label for="user_name" class="form-label">
+                    <div className="mb-3">
+                      <label for="user_name" className="form-label">
                         Name
                       </label>
                       <input
                         type="name"
-                        class="form-control"
+                        className="form-control"
                         id="user_name"
                         name="user_name"
                         placeholder="Your name"
-                        value=""
+                        value={user.user_name}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, user_name: e.target.value }))
+                        }
                       />
                       {/* -- show error message -- */}
                       {/* @error('name') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                     {/* -- email -- */}
-                    <div class="mb-3">
-                      <label for="email" class="form-label">
+                    <div className="mb-3">
+                      <label for="email" className="form-label">
                         Email
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="email"
                         name="email"
                         placeholder="your@email.com"
-                        value=""
+                        value={user.email}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, email: e.target.value }))
+                        }
                       />
                       {/* -- show error message -- */}
                       {/* @error('email') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                     {/* -- DOB -- */}
-                    <div class="mb-3">
-                      <label for="password" class="form-label">
+                    <div className="mb-3">
+                      <label for="password" className="form-label">
                         Password
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="password"
                         name="password"
-                        value=""
+                        value={user.password}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, password: e.target.value }))
+                        }
                       />
                       {/* -- show error message -- */}
                       {/* @error('passowrd') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                     {/* -- phone -- */}
-                    <div class="mb-3">
-                      <label for="address" class="form-label">
+                    <div className="mb-3">
+                      <label for="address" className="form-label">
                         Address
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="address"
                         name="address"
                         placeholder="Your Address"
-                        value=""
+                        value={user.address}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, address: e.target.value }))
+                        }
                       />
                       {/* -- show error message -- */}
                       {/* @error('address') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                     {/* -- phoen -- */}
-                    <div class="mb-3">
-                      <label for="phone" class="form-label">
+                    <div className="mb-3">
+                      <label for="phone" className="form-label">
                         Phone
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="phone"
                         name="phone"
-                        value=""
+                        value={user.phone}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, phone: e.target.value }))
+                        }
                       />
                       {/* -- show error message -- */}
                       {/* @error('phone') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                   </div>
-                  <div class="user_edit__form__box">
+                  <div className="user_edit__form__box">
                     {/* -- joining_date -- */}
-                    <div class="mb-3">
-                      <label for="joiningDate" class="form-label">
+                    <div className="mb-3">
+                      <label for="joiningDate" className="form-label">
                         Joining Date
                       </label>
                       <input
                         type="date"
-                        class="form-control"
+                        className="form-control"
                         id="joiningDate"
                         name="joiningDate"
-                        value="{{old('joiningDate')}}"
+                        value={user.joiningDate}
+                        onChange={(e) =>
+                          setUser((v) => ({
+                            ...v,
+                            joiningDate: e.target.value,
+                          }))
+                        }
                       />
                       {/* -- show error message -- */}
                       {/* @error('joiningDate') */}
-                      <span class="text-danger"></span>
-                      {/* @enderror */}
-                    </div>
-                    {/* -- photo -- */}
-                    <div class="mb-3">
-                      <label for="photo" class="form-label">
-                        Photo
-                      </label>
-                      <input
-                        type="name"
-                        class="form-control"
-                        id="status"
-                        name="status"
-                        placeholder="Your name"
-                        value=""
-                      />
-                      {/* -- show error message -- */}
-                      {/* @error('status') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                     {/* -- status -- */}
-                    <div class="mb-3">
-                      <label for="status" class="form-label">
+                    <div className="mb-3">
+                      <label for="status" className="form-label">
                         Status
                       </label>
                       <select
-                        class="form-select"
+                        className="form-select"
                         name="status"
                         aria-label="Default select example"
+                        value={user.status}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, status: e.target.value }))
+                        }
                       >
-                        <option selected>Not Selected</option>
+                        <option value={null}>Not Selected</option>
                         <option value="valid">Valid</option>
                         <option value="invalid">Invalid</option>
                       </select>
                       {/* -- show error message -- */}
                       {/* @error('email') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                     {/* -- team -- */}
-                    <div class="mb-3">
-                      <label for="team" class="form-label">
+                    <div className="mb-3">
+                      <label for="team" className="form-label">
                         Assign Team
                       </label>
                       <select
-                        class="form-select"
+                        className="form-select"
                         name="team_id"
                         aria-label="Default select example"
+                        value={user.team_id}
+                        onChange={(e) =>
+                          setUser((v) => ({ ...v, team_id: e.target.value }))
+                        }
                       >
-                        <option selected>Not Selected</option>
+                        <option value={null}>Not Selected</option>
                         <option value="1">Manager</option>
                         <option value="2">Tester</option>
                         <option value="3">Developer</option>
                       </select>
                       {/* -- show error message -- */}
                       {/* @error('team') */}
-                      <span class="text-danger"></span>
+                      <span className="text-danger"></span>
                       {/* @enderror */}
                     </div>
                   </div>
                   {/* -- submit -- */}
-                  <div class="user_edit__form__box_button">
-                    <button type="submit" class="btn btn-primary">
+                  <div className="user_edit__form__box_button">
+                    <button
+                      onClick={handleSubmitForm}
+                      type="submit"
+                      className="btn btn-primary"
+                    >
                       Register
                     </button>
                   </div>

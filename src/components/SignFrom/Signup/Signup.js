@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "../../Shared/Css/SignForm.css";
 import gooogleIcon from "../../../asset/icons/google-icon.png";
 import facebookIcon from "../../../asset/icons/facebook-icon.png";
+import useInput from "../../../hooks/useInput";
+import service from "../../../service";
 // import {
 //   createUserWithEmailPassword,
 //   handelSignInFacebook,
@@ -26,19 +28,23 @@ const Signup = () => {
     success: false,
   });
 
-  //Google
-  // const googleSignIn = () => {
-  //   handleSignInGoogle().then((res) => {
-  //     handelResponse(res, true);
-  //   });
-  // };
+  const nameIc = useInput("");
+  const emailIc = useInput("");
+  const passwordIc = useInput("");
+  const password2Ic = useInput("");
 
-  // //Facebook
-  // const facebookSignIn = () => {
-  //   handelSignInFacebook().then((res) => {
-  //     handelResponse(res, true);
-  //   });
-  // };
+  const [emailError, setEmailError] = useState("");
+
+  const emailValidation = () => {
+    const regex =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (!emailIc.value || regex.test(emailIc.value) === false) {
+      setEmailError("Email is not valid");
+      return;
+    }
+    setEmailError("");
+    return;
+  };
 
   const handelResponse = (res, redirect) => {
     setUser(res);
@@ -71,19 +77,21 @@ const Signup = () => {
     }
   };
 
-  //Sign up
-  // const handelSubmit = (event) => {
-  //   //sign up
-  //   if (user.name && user.email && user.password) {
-  //     createUserWithEmailPassword(user.name, user.email, user.password).then(
-  //       (res) => {
-  //         handelResponse(res, true);
-  //       }
-  //     );
-  //     navigate("/login");
-  //   }
-  //   event.preventDefault();
-  // };
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log(
+      nameIc.value,
+      emailIc.value,
+      passwordIc.value,
+      password2Ic.value
+    );
+    const { data: response } = await service.post(`auth/sign-up`, {
+      user_name: nameIc.value,
+      email: emailIc.value,
+      password: passwordIc.value,
+    });
+    console.log(response);
+  };
 
   return (
     <div className="sign_form mb-5">
@@ -91,14 +99,16 @@ const Signup = () => {
         <div className="sign__email">
           <div className="sign__title">
             <h1>Create an account</h1>
+            {emailError}
           </div>
-          <form onSubmit={""} action="">
+          <form action="">
             <div className="sign__input">
               <input
-                onBlur={handelOnBlur}
+                onBlur={emailValidation}
                 type="text"
                 name="email"
                 placeholder="Email"
+                {...emailIc}
               />
               <br />
               <input
@@ -106,6 +116,7 @@ const Signup = () => {
                 type="text"
                 name="name"
                 placeholder="Name"
+                {...nameIc}
               />
               <br />
               <input
@@ -113,16 +124,18 @@ const Signup = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
+                {...passwordIc}
               />
               <input
                 onBlur={handelOnBlur}
                 type="password"
                 name="confirm_password"
                 placeholder="Confirm Password"
+                {...password2Ic}
               />
             </div>
             <div className="sign__email__rememberme_forget_password"></div>
-            <input type="submit" value="Sign Up" />
+            <input onClick={handleFormSubmit} type="submit" value="Sign Up" />
           </form>
           <p>
             Already have an account?&nbsp;<Link to="/signin">Login</Link>
@@ -139,7 +152,7 @@ const Signup = () => {
           </p>
         </div>
         <div className="sign__facebook_google">
-          <button onClick={""}>
+          <button>
             <img src={gooogleIcon} alt="" />
             <span>Continue with Google</span>
             <span className="sign__facebook_google-space"></span>
